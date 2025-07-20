@@ -8,21 +8,9 @@ namespace CatFact
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        public static async Task RunWithService(IFactService factService)
         {
-
             var lastFact = "";
-
-            using var host = Host.CreateDefaultBuilder(args)
-                .ConfigureServices((_, services) =>
-                {
-                    services.AddHttpClient<IFactService, FactService>(c =>
-                    c.BaseAddress = new Uri("https://catfact.ninja/"));
-                })
-                .Build();
-
-            var factService = host.Services.GetRequiredService<IFactService>();
-
             bool running = true;
 
             while (running)
@@ -80,6 +68,25 @@ namespace CatFact
                         break;
                 }
             }
+
+
+
+        }
+        static async Task Main(string[] args)
+        {
+
+            using var host = Host.CreateDefaultBuilder(args)
+                .ConfigureServices((_, services) =>
+                {
+                    services.AddHttpClient<IFactService, FactService>(c =>
+                    c.BaseAddress = new Uri("https://catfact.ninja/"));
+                })
+                .Build();
+
+            var factService = host.Services.GetRequiredService<IFactService>();
+
+            await RunWithService(factService);
+
         }
     }
 }
