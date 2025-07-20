@@ -11,6 +11,7 @@ namespace CatFact
         public static async Task RunWithService(IFactService factService)
         {
             var lastFact = "";
+            var lastSavedFact = "";
             bool running = true;
 
             while (running)
@@ -38,10 +39,15 @@ namespace CatFact
                         {
                             Console.WriteLine("No fact to save. First peek a fact!");
                         }
+                        else if (lastFact == lastSavedFact)
+                        {
+                            Console.WriteLine("Fact already saved!");
+                        }
                         else
                         {
                             await factService.SaveFactAsync(lastFact);
                             Console.WriteLine("Saved to file.");
+                            lastSavedFact = lastFact;
                         }
                         break;
 

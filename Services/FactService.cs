@@ -32,7 +32,7 @@ namespace CatFact.Services
 
         public async Task SaveFactAsync(string fact)
         {
-            await File.AppendAllTextAsync(FilePath, fact + Environment.NewLine);
+            await File.AppendAllTextAsync(FilePath, fact + Environment.NewLine + Environment.NewLine);
         }
     }
 }
