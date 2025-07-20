@@ -14,7 +14,7 @@ namespace CatFact.Test
         public async Task RunWithService_PrintsMenuAndFact()
         {
             var mock = new Mock<IFactService>();
-            mock.Setup(s => s.GetFactAsync()).ReturnsAsync(new Fact { Text = "mock", Length = 4 });
+            mock.Setup(s => s.GetFactAsync()).ReturnsAsync(new Fact { Text = "mocked_fact", Length = 4 });
 
             using var input = new StringReader("1\n4\n");
             using var output = new StringWriter();
@@ -25,7 +25,10 @@ namespace CatFact.Test
 
             var txt = output.ToString();
             Assert.Contains("1) Peek current fact", txt);
-            Assert.Contains("mock", txt);
+            Assert.Contains("2) Save last fact", txt);
+            Assert.Contains("3) See all saved facts", txt);
+            Assert.Contains("4) Exit", txt);
+            Assert.Contains("mocked_fact", txt);
         }
     }
 }
