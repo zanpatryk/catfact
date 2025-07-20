@@ -20,6 +20,7 @@
 
   <PropertyGroup>
     <IsTestProject>true</IsTestProject>
+    <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
 </Project>
